@@ -24,3 +24,11 @@
   font-weight: 700;
   font-style: italic;
 }
+
+:root {
+  --yellow-primary: #f5d44c;
+  --black-primary: #111111;
+  --white-primary: #ffffff;
+  --purple-accent: #5e3bee;
+  --black-text: #000000;
+}
