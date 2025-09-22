@@ -2,27 +2,34 @@
 title: 'Activity API'
 description: 'Hide Your component without loosing the state.'
 pubDate: 'Sep 22 2025'
+tags: ['react', 'Activity', 'activity-api']
+published: false
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae ultricies leo integer malesuada nunc vel risus commodo viverra. Adipiscing enim eu turpis egestas pretium. Euismod elementum nisi quis eleifend quam adipiscing. In hac habitasse platea dictumst vestibulum. Sagittis purus sit amet volutpat. Netus et malesuada fames ac turpis egestas. Eget magna fermentum iaculis eu non diam phasellus vestibulum lorem. Varius sit amet mattis vulputate enim. Habitasse platea dictumst quisque sagittis. Integer quis auctor elit sed vulputate mi. Dictumst quisque sagittis purus sit amet.
+> The <strong>Activity</strong> API is now available for experimentation, with its <a href="https://react.dev/blog/2023/05/03/react-canaries" target="_blank" rel="noopener noreferrer">Canary</a> release.
 
-Morbi tristique senectus et netus. Id semper risus in hendrerit gravida rutrum quisque non tellus. Habitasse platea dictumst quisque sagittis purus sit amet. Tellus molestie nunc non blandit massa. Cursus vitae congue mauris rhoncus. Accumsan tortor posuere ac ut. Fringilla urna porttitor rhoncus dolor. Elit ullamcorper dignissim cras tincidunt lobortis. In cursus turpis massa tincidunt dui ut ornare lectus. Integer feugiat scelerisque varius morbi enim nunc. Bibendum neque egestas congue quisque egestas diam. Cras ornare arcu dui vivamus arcu felis bibendum. Dignissim suspendisse in est ante in nibh mauris. Sed tempus urna et pharetra pharetra massa massa ultricies mi.
+<details>
+  <summary><strong>What does this API do now?</strong></summary>
+  This API will allow components to be
+  <ul>
+    <li>Visually hidden</li>
+    <li>Preserve UI state with reduced performance coast compared to unmounting</li>
+  </ul>
+</details>
 
-Mollis nunc sed id semper risus in. Convallis a cras semper auctor neque. Diam sit amet nisl suscipit. Lacus viverra vitae congue eu consequat ac felis donec. Egestas integer eget aliquet nibh praesent tristique magna sit amet. Eget magna fermentum iaculis eu non diam. In vitae turpis massa sed elementum. Tristique et egestas quis ipsum suspendisse ultrices. Eget lorem dolor sed viverra ipsum. Vel turpis nunc eget lorem dolor sed viverra. Posuere ac ut consequat semper viverra nam. Laoreet suspendisse interdum consectetur libero id faucibus. Diam phasellus vestibulum lorem sed risus ultricies tristique. Rhoncus dolor purus non enim praesent elementum facilisis. Ultrices tincidunt arcu non sodales neque. Tempus egestas sed sed risus pretium quam vulputate. Viverra suspendisse potenti nullam ac tortor vitae purus faucibus ornare. Fringilla urna porttitor rhoncus dolor purus non. Amet dictum sit amet justo donec enim.
+Current behaviour of `<Activity/>` is limited to `true/false`.
 
-Mattis ullamcorper velit sed ullamcorper morbi tincidunt. Tortor posuere ac ut consequat semper viverra. Tellus mauris a diam maecenas sed enim ut sem viverra. Venenatis urna cursus eget nunc scelerisque viverra mauris in. Arcu ac tortor dignissim convallis aenean et tortor at. Curabitur gravida arcu ac tortor dignissim convallis aenean et tortor. Egestas tellus rutrum tellus pellentesque eu. Fusce ut placerat orci nulla pellentesque dignissim enim sit amet. Ut enim blandit volutpat maecenas volutpat blandit aliquam etiam. Id donec ultrices tincidunt arcu. Id cursus metus aliquam eleifend mi.
-
-Tempus quam pellentesque nec nam aliquam sem. Risus at ultrices mi tempus imperdiet. Id porta nibh venenatis cras sed felis eget velit. Ipsum a arcu cursus vitae. Facilisis magna etiam tempor orci eu lobortis elementum. Tincidunt dui ut ornare lectus sit. Quisque non tellus orci ac. Blandit libero volutpat sed cras. Nec tincidunt praesent semper feugiat nibh sed pulvinar proin gravida. Egestas integer eget aliquet nibh praesent tristique magna.
-
-```bash
-greo run install
+```jsx
+<Activity mode={visibility ? 'visible' : 'hidden'}>
+  <Page />
+</Activity>
 ```
 
-```js
-const a = 10;
-```
+`<Activity />` Component accepts 2 props:-
 
-```python
-def a():
-    return a + b
-```
+- **mode-** type of string which holds value `visible` or `hidden`.
+- **children-** A user interface component that is either visible or hidden.
+
+When the `Activity` "boundary is hidden, all of its children are also hidden using CSS's `display: none` property, and all of its childrens effects are cleanedup and subscriptions are removed, but its states are preserved, and these continue to render with the low priority than anything visible on the screen at that point of time.
+
+And the moment `Activity` boundary is visible React will unleash its children with their previous states and re-create their effects, and attach subscriptions if there are any. Rather than discarding the UI completely, React hide them and unleash them when ever user wanted and React make sure that it should not perform any side effects.
