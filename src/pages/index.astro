@@ -19,6 +19,7 @@ const posts = (await getCollection('blog')).sort(
 		<style>
 			main {
 				width: 960px;
+				margin: 2rem auto;
 			}
 			ul {
 				display: flex;
@@ -38,7 +39,7 @@ const posts = (await getCollection('blog')).sort(
 			ul li:first-child {
 				width: 100%;
 				margin-bottom: 1rem;
-				text-align: center;
+				text-align: left;
 			}
 			ul li:first-child img {
 				width: 100%;
@@ -53,6 +54,13 @@ const posts = (await getCollection('blog')).sort(
 			ul li a {
 				display: block;
 			}
+			ul li a:hover {
+				text-decoration: none;
+				transform: translateY(-4px);
+				transition: 0.5s ease;
+
+
+			}
 			.title {
 				margin: 0;
 				color: white;
@@ -61,10 +69,13 @@ const posts = (await getCollection('blog')).sort(
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
+				font-size: 14px;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			.description{
+				color: rgb(var(--dark-gray));
+				margin: 0;
+				opacity: 0.7;
+				font-size: 18px;
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
@@ -102,6 +113,7 @@ const posts = (await getCollection('blog')).sort(
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
+									<p class="description">{post.data.description}</p>
 								</a>
 							</li>
 						))
