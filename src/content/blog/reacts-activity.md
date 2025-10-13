@@ -1,7 +1,7 @@
 ---
 title: 'React 19.2 <Activity />: Hide Components Without Losing State'
 description: 'Learn how to use the new <Activity /> component in React 19.2 to hide components without unmounting, preserve UI state, and pre-render hidden content using Suspense.'
-pubDate: 'Sep 22 2025'
+pubDate: 'Oct 12 2025'
 tags:
   [
     'react',
@@ -114,4 +114,4 @@ When the `Activity` boundary is visible React restores its children with their p
 
   Now `StockList` Component is already renderd with the data which it needs.
 
-> React’s <Activity /> is a powerful addition for preserving UI state while optimizing performance. It enables developers to toggle visibility without unmounting and prefetch data with Suspense. As React evolves, expect even more flexible control over component lifecycles and transitions.
+> React’s `<Activity />` component is a powerful addition for preserving UI state while improving performance. It allows developers to toggle component visibility without unmounting and supports data prefetching through Suspense. Currently,` <Activity />` supports two props, with more functionality expected in future updates.
